@@ -14,7 +14,7 @@ import org.jsoup.Jsoup;
 public class YahoonewsServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		resp.setContentType("xml;charset=UTF-8");
+		resp.setContentType("text/xml;charset=UTF-8");
 		//resp.getWriter().println("Yahoo News");
 		String url = req.getParameter("feed");
 		
