@@ -8,6 +8,14 @@
 		<url-pattern>/newsfeed</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>FeedValidator</servlet-name>
+		<servlet-class>com.example.newsfeed.FeedValidatorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FeedValidator</servlet-name>
+		<url-pattern>/feedvalidator</url-pattern>
+	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>Yahoonews</servlet-name>
