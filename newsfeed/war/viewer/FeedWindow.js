@@ -98,17 +98,22 @@ Ext
 					 */
 					onAddClick : function(addBtn) {
 						addBtn.disable();
-						var theurl = this.form.getComponent('feed').getValue();
+						var url = this.form.getComponent('feed').getValue();
 						this.form.setLoading({
 							msg : 'Validating feed...'
 						});
 						Ext.Ajax.request({
-							url : '/feedvalidator',
+							url : 'feedvalidator',
+							method: 'GET',
 							params : {
-								feed : theurl
+								feed : url
 							},
-							success : this.validateFeed,
-							failure : this.markInvalid,
+							success : function(response){
+								this.validateFeed(response);
+							},
+							failure : function(response){
+								this.marlInvalid();
+							},
 							scope : this
 						});
 						// http://edition.cnn.com/services/rss
@@ -129,20 +134,19 @@ Ext
 						var dq = Ext.DomQuery, url = this.form.getComponent(
 								'feed').getValue(), xml, channel, title;
 
-						// try {
-						xml = response.responseXML;
-						channel = xml.getElementsByTagName('channel')[0];
-						if (channel) {
-							title = dq.selectValue('title', channel, url);
-							this.fireEvent('feedvalid', this, title, url);
-							this.hide();
-							return;
-						}
-						// } catch (e) {
-						//						
-						// }
-						// this.markInvalid();
+						try {
+							xml = response.responseXML;
+							channel = xml.getElementsByTagName('channel')[0];
+							if (channel) {
+								title = dq.selectValue('title', channel, url);
+								this.fireEvent('feedvalid', this, title, url);
+								this.hide();
+								return;
+							}
+						} catch (e) {
 
+						}
+						this.markInvalid();
 					},
 
 					/**

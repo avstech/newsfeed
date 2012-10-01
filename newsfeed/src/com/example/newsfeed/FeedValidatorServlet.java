@@ -27,8 +27,9 @@ public class FeedValidatorServlet extends HttpServlet {
 				.method(Method.GET).execute();
 
 		String xml = res2Jsoup.body();
-		System.out.print(xml);
+		//System.out.print(xml);
 		resp.setContentType(res2Jsoup.contentType());
 		resp.getWriter().print(xml);
+		
 	}
 }
